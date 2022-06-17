@@ -32,6 +32,10 @@ replay_pid*
 .project
 .settings/*
 
+#META-INF#
+**/*.MF
+
+
 # End of https://www.toptal.com/developers/gitignore/api/java
 /bin/
 /build/
