@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.eclipse.jdt.internal.compiler.parser.Scanner;
 
 public class UserDAO {
 	
@@ -52,10 +55,24 @@ public class UserDAO {
 			pstmt.setString(3, user.getUserName());
 			pstmt.setString(4, user.getUserGender());
 			pstmt.setString(5, user.getUserEmail());
+			
+			
 			return pstmt.executeUpdate();
-		} catch(Exception e) {
+		} catch(SQLException e) {
 			e.printStackTrace();
+		}finally {
+			if(pstmt != null || conn != null) {
+				try {
+					pstmt.close();
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
 		}
 		return -1; // 데이터베이스 오류
 	}
+	
 }
